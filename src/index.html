@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <!--<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">-->
+  <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+</head>
+
+<body>
+  <header>
+
+  </header>
+  <section id='hero'>
+
+    <div class='layer-bg layer' data-depth='0.10' data-type='parallax'><canvas></canvas></div>
+    <div id="sidebar">
+      <div id="tbtn" class="toggle-btn" onclick="show()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul>
+        <a id="one" onclick="change('Intro', 'map', 'one'), changePetal('one')">Sakura</a>
+        <a id="two" onclick="change('Intro', 'map', 'two'), changePetal('two')">Flamboyanttree</a>
+        <a id="three" onclick="change('Intro', 'map', 'three'), changePetal('three')">Golden shower</a>
+        <a id="four" onclick="change('Intro', 'map', 'four'), changePetal('four')">Yellow Pui</a>
+        <a id="five" onclick="change('Intro', 'map', 'five'), changePetal('five')">Cotton Tree</a>
+        <a id="six" onclick="change('Intro', 'map', 'six'), changePetal('six')">台灣欒樹</a>
+      </ul>
+    </div>
+    <!--
+    <nav id="bar" class="sidebar">
+      <div class="menu">
+        <ul>
+          <li><a href="#" id="one" onclick="change('Intro', 'map', 'one'), changePetal('one')">Sakura</a></li>
+          <li><a href="#" id="two" onclick="change('Intro', 'map', 'two'), changePetal('two')">Flamboyanttree</a></li>
+          <li><a href="#" id="three" onclick="change('Intro', 'map', 'three'), changePetal('three')">Golden shower</a></li>
+          <li><a href="#" id="four" onclick="change('Intro', 'map', 'four'), changePetal('four')">Yellow Pui</a></li>
+          <li><a href="#" id="five" onclick="change('Intro', 'map', 'five'), changePetal('five')">Cotton Tree</a></li>
+        </ul>
+      </div>
+    </nav>
+  -->
+    <div class="wrapper">
+      <div class="flowerIntro container" id="Intro" >
+        <img id="flowerImg" src="./imgs/1.jpg" alt="">
+        <div id="discript" class="discription">
+          <h1 id="flowerName">Flower</h1>
+          <p id="flowerInfo">Maecenas placerat malesuada nisi ac tempor. Fusce hendrerit vestibulum lorem eget consectetur. Integer quis turpis ultrices, fringilla enim nec, venenatis massa. Sed ornare urna quis malesuada scelerisque. Suspendisse feugiat commodo augue, in laoreet nunc facilisis eget. Aliquam mi risus, tincidunt non tellus sit amet, fermentum molestie odio. Maecenas eu placerat nisl. Duis imperdiet dignissim vulputate. Donec imperdiet cursus libero, et venenatis lorem congue ut.</p>
+        </div>
+      </div>
+
+      <div class="Map" id="map" onclick="showModal('mapImg')">
+        <img id="mapImg" src="./imgs/map.png" alt="">
+      </div>
+    </div>
+
+    <!--Modal-->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImg">
+      <div id="caption"></div>
+    </div>
+
+
+    <!--<div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>-->
+  </section>
+  <div class="savePics">
+    <img src="./imgs/map2.png" alt="">
+    <img src="./imgs/map3.png" alt="">
+    <img src="./imgs/1.jpg" alt="">
+    <img src="./imgs/2.jpg" alt="">
+    <img src="./imgs/3.jpg" alt="">
+    <img src="./imgs/4.jpg" alt="">
+    <img src="./imgs/5.jpg" alt="">
+    <img src="./imgs/6.jpg" alt="">
+    <img src="./imgs/hero.jpg" alt="">
+    <img src="./imgs/hero_blur1.jpg" alt="">
+    <img src="./imgs/hero_blur2.jpg" alt="">
+    <img src="./imgs/hero_blur3.jpg" alt="">
+    <img src="./imgs/hero_blur4.jpg" alt="">
+    <img src="./imgs/hero_blur5.jpg" alt="">
+    <img src="./imgs/hero_blur6.jpg" alt="">
+  </div>
+<!--
+  <section class="about">
+    <div class="container">
+        <div class='item' id="about-text">
+          <h1>Lorem Ipsum</h1>
+        </div>
+        <div class='item discription-item'>
+          <div class="discription1 container">
+            <div class="container">
+              <img src="./imgs/1.jpg" alt="" height="300px" width="450px">
+
+
+
+            </div>
+          </div>
+          <div class="discription2 container">
+            <div class="container">
+              <p>Maecenas placerat malesuada nisi ac tempor. Fusce hendrerit vestibulum lorem eget consectetur. Integer quis turpis ultrices, fringilla enim nec, venenatis massa. Sed ornare urna quis malesuada scelerisque. Suspendisse feugiat commodo augue, in laoreet nunc facilisis eget. Aliquam mi risus, tincidunt non tellus sit amet, fermentum molestie odio. Maecenas eu placerat nisl. Duis imperdiet dignissim vulputate. Donec imperdiet cursus libero, et venenatis lorem congue ut.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+</body>
+</html>
