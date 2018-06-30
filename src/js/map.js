@@ -1,3 +1,5 @@
+import location from '../static/location.json';
+
 var intro = document.getElementById('Intro');
 var flowerName = document.getElementById('flowerName');
 var flowerChineseName = document.getElementById('flowerChineseName');
@@ -13,11 +15,11 @@ var btn = document.getElementById('tbtn');
 //street map
 var map = L.map('map').setView([22.997212163259757, 120.22078156471254], 15.5);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVuczAzMDYiLCJhIjoiY2pqMDl0enBvMDY4azNsdW9rdzR0dWZjaSJ9.8vPCsawEcYKn_mB7o-yEAA', {
-	maxZoom: 18,
-	//attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-	//	'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-	//	'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-	id: 'mapbox.streets'
+  maxZoom: 18,
+  //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+  //	'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+  //	'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  id: 'mapbox.streets'
 }).addTo(map);
 
 //add some geoJson
@@ -40,9 +42,9 @@ var location = {
 };
 */
 L.geoJson(location, {
-	//onEachFeature: function (feature, layer) {
-	//	layer.bindPopup(feature.properties.tipo);
-	//}
+  //onEachFeature: function (feature, layer) {
+  //	layer.bindPopup(feature.properties.tipo);
+  //}
 }).addTo(map);
 
 //add some geoJson
@@ -51,78 +53,79 @@ var popup = L.popup();
 
 
 
-	// variable to define the icon based on the type of point
-	function getStatoIcon(dat) {
-		return  dat === 'platano'   ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/autumn2.svg' :
-		        dat === 'faggio'   ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/tree79.svg' :
-		        'http://www.cityplanner.it/supply/icon_web/mapbox-maki-51d4f10/src/park-24.svg';
-	}
-	// upload the geojson file with the jQuery method
-	/*
-	$.getJSON("./json/map.geojson", function(data) {
-		var geojson = L.geoJson(data, {
-	  		pointToLayer: function (feature, latlng) {
-	  			// crea un punto e definisce l'icona per ogni punto
-	    		return L.marker(latlng, {
-	      			icon: L.icon({
-	        			iconUrl: getStatoIcon(feature.properties.tipo),
-	        			iconSize: [24, 28],
-	        			iconAnchor: [12, 28],
-	        			popupAnchor: [0, -25]
-	      			}),
-	      			//
-	      			title: feature.properties.tipo,
-	      			riseOnHover: true
-	   			});
-			},
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup(feature.properties.tipo);
-			}
-		});
-		geojson.addTo(map);
-	});
-	*/
-	// insert function on click on the map
- window.addIcon = function(e) {
-
-	return L.marker(e.latlng, {
-			icon: L.icon({
-				iconUrl: getStatoIcon(feature.properties.tipo),
-				iconSize: [24, 28],
-				iconAnchor: [12, 28],
-				popupAnchor: [0, -25]
-			}),
-			//
-			title: feature.properties.tipo,
-			riseOnHover: true
-	});
+// variable to define the icon based on the type of point
+function getStatoIcon(dat) {
+  return dat === 'platano' ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/autumn2.svg' :
+    dat === 'faggio' ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/tree79.svg' :
+    'http://www.cityplanner.it/supply/icon_web/mapbox-maki-51d4f10/src/park-24.svg';
 }
-	function onMapClick(e) {
-		// removes the central point with the popup
-		//map.removeLayer(marker);
-		// prende le coordinate dall'evento
-		var lat = (e.latlng.lat);
-		var lng = (e.latlng.lng);
-		// defines the popup
-		popup
-		.setLatLng(e.latlng)
-		.setContent("<button onclick='addIcon(e)'>yes</button>")
-		// create a form within the popup
-		/*
-		.setContent("<form method='POST'><input type='hidden' name='lat' value="
-			+lat
-			+"><input type='hidden' name='lng' value="
-			+lng
-			+">"
-			+"<input type='radio' name='tipo' value='platano' checked>Platano<br>"
-			+"<input type='radio' name='tipo' value='faggio'>Faggio<hr>"
-			+"<button type='submit' name='submit' style='padding:4px;width:100%;'>+</button></form>")
-			*/
-		.openOn(map);
-	}
-	map.on('click', onMapClick);
+// upload the geojson file with the jQuery method
+/*
+$.getJSON("./json/map.geojson", function(data) {
+	var geojson = L.geoJson(data, {
+  		pointToLayer: function (feature, latlng) {
+  			// crea un punto e definisce l'icona per ogni punto
+    		return L.marker(latlng, {
+      			icon: L.icon({
+        			iconUrl: getStatoIcon(feature.properties.tipo),
+        			iconSize: [24, 28],
+        			iconAnchor: [12, 28],
+        			popupAnchor: [0, -25]
+      			}),
+      			//
+      			title: feature.properties.tipo,
+      			riseOnHover: true
+   			});
+		},
+		onEachFeature: function (feature, layer) {
+			layer.bindPopup(feature.properties.tipo);
+		}
+	});
+	geojson.addTo(map);
+});
+*/
+// insert function on click on the map
+window.addIcon = function (e) {
 
-window.change = async function(id1, id2, id3){
+  return L.marker(e.latlng, {
+    icon: L.icon({
+      iconUrl: getStatoIcon(feature.properties.tipo),
+      iconSize: [24, 28],
+      iconAnchor: [12, 28],
+      popupAnchor: [0, -25]
+    }),
+    //
+    title: feature.properties.tipo,
+    riseOnHover: true
+  });
+}
+
+function onMapClick(e) {
+  // removes the central point with the popup
+  //map.removeLayer(marker);
+  // prende le coordinate dall'evento
+  var lat = (e.latlng.lat);
+  var lng = (e.latlng.lng);
+  // defines the popup
+  popup
+    .setLatLng(e.latlng)
+    .setContent("<button onclick='addIcon(e)'>yes</button>")
+    // create a form within the popup
+    /*
+    .setContent("<form method='POST'><input type='hidden' name='lat' value="
+    	+lat
+    	+"><input type='hidden' name='lng' value="
+    	+lng
+    	+">"
+    	+"<input type='radio' name='tipo' value='platano' checked>Platano<br>"
+    	+"<input type='radio' name='tipo' value='faggio'>Faggio<hr>"
+    	+"<button type='submit' name='submit' style='padding:4px;width:100%;'>+</button></form>")
+    	*/
+    .openOn(map);
+}
+map.on('click', onMapClick);
+
+window.change = async function (id1, id2, id3) {
   var f = document.getElementById(id1);
   var m = document.getElementById(id2);
   var flowerImg = document.getElementById("flowerImg");
@@ -150,7 +153,7 @@ window.change = async function(id1, id2, id3){
       flowerImg.src = "./imgs/1.jpg";
       //mapImg.src = "./imgs/map1.png";
       mapImg.alt =
-      `
+        `
       勝利校區大道
       成功湖畔
       `;
@@ -158,10 +161,10 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "羊蹄甲";
       flowerSeason.textContent = "Season : Mar ~ May";
       flowerInfo.textContent =
-      `
+        `
       It is a small to medium-sized tree growing to 10–12 metres (33–39 ft) tall, deciduous in the dry season. The leaves are 10–20 centimetres (3.9–7.9 in) obcordate shaped, long and broad, rounded, and bilobed at the base and apex. The flowers are conspicuous, bright pink or white, 8–12 centimetres (3.1–4.7 in) diameter, with five petals. The fruit is a pod 15–30 centimetres (5.9–11.8 in) long, containing several seeds.
       `;
-        //羊蹄甲（學名：Bauhinia variegata）是一種豆科蘇木亞科羊蹄甲屬的有花植物，為一種落葉小喬木，俗稱蘭花木、印度櫻花、南洋櫻花、馬蹄豆、白花羊紫荊；羊蹄甲，中國大陸稱為洋紫荊，港澳稱為宮粉羊蹄甲。原產於中國南部、印度及馬來半島。羊蹄甲於每年3月至5月落葉後開花，花有5枚粉紅色的花瓣，其中1枚有深紅色條紋。而不少人將此花與同屬屬的艷紫荊混淆，主要分別在於後者開花期不同，艷紫荊的開花期為秋天（11月前後）並且在開花時葉茂盛。
+      //羊蹄甲（學名：Bauhinia variegata）是一種豆科蘇木亞科羊蹄甲屬的有花植物，為一種落葉小喬木，俗稱蘭花木、印度櫻花、南洋櫻花、馬蹄豆、白花羊紫荊；羊蹄甲，中國大陸稱為洋紫荊，港澳稱為宮粉羊蹄甲。原產於中國南部、印度及馬來半島。羊蹄甲於每年3月至5月落葉後開花，花有5枚粉紅色的花瓣，其中1枚有深紅色條紋。而不少人將此花與同屬屬的艷紫荊混淆，主要分別在於後者開花期不同，艷紫荊的開花期為秋天（11月前後）並且在開花時葉茂盛。
       //`;
       break;
     case 'two':
@@ -170,7 +173,7 @@ window.change = async function(id1, id2, id3){
       flowerImg.src = "./imgs/2.jpg";
       //mapImg.src = "./imgs/map2.png";
       mapImg.alt =
-      `
+        `
       航太系館校區外圍</p>
       自強校區面林森路</p>
       小東路, 榕園旁</p>
@@ -180,7 +183,7 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "鳳凰花";
       flowerSeason.textContent = "Season : May ~ July";
       flowerInfo.textContent =
-      `
+        `
       The flowers of Delonix regia are large, with four spreading scarlet or orange-red petals up to 8 cm long, and a fifth upright petal called the standard, which is slightly larger and spotted with yellow and white. They appear in corymbs along and at the ends of branches. The naturally occurring variety flavida (Bengali: Radhachura) has yellow flowers. The pods are green and flaccid when young and turn dark-brown and woody. They can be up to 60 cm long and 5 cm wide. The seeds are small, weighing around 0.4 g on average. The compound (doubly pinnate) leaves have a feathery appearance and are a characteristic light, bright green. Each leaf is 30–50 cm long with 20 to 40 pairs of primary leaflets or pinnae, each divided into 10–20 pairs of secondary leaflets or pinnules.
       `;
       /*
@@ -195,7 +198,7 @@ window.change = async function(id1, id2, id3){
       flowerImg.src = "./imgs/3.jpg";
       //mapImg.src = "./imgs/map3.png";
       mapImg.alt =
-      `
+        `
       林森路</p>
       成杏校區後方</p>
       成功入口</p>
@@ -205,7 +208,7 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "阿勃勒";
       flowerSeason.textContent = "Season : May ~ June";
       flowerInfo.textContent =
-      `
+        `
       The golden shower tree is a medium-sized tree, growing to 10–20 m (33–66 ft) tall with fast growth. The leaves are deciduous, 15–60 cm (5.9–23.6 in) long, and pinnate with three to eight pairs of leaflets, each leaflet 7–21 cm (2.8–8.3 in) long and 4–9 cm (1.6–3.5 in) broad. The flowers are produced in pendulous racemes 20–40 cm (7.9–15.7 in) long, each flower 4–7 cm (1.6–2.8 in) diameter with five yellow petals of equal size and shape. The fruit is a legume, 30–60 cm (12–24 in) long and 1.5–2.5 centimetres (0.59–0.98 in) broad, with a pungent odor and containing several seeds. The tree has strong and very durable wood, and has been used to construct "Ahala Kanuwa", a place at Adams Peak, Sri Lanka, which is made of Cassia fistula (ahala, ehela, or aehaela, ඇහැල in Sinhala) heartwood.
       `;
       /*
@@ -224,7 +227,7 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "黃花風鈴木";
       flowerSeason.textContent = "Season : March";
       flowerInfo.textContent =
-      `
+        `
       H. chrysotrichus grows to a height of 5 to 8 m (15 to 25 ft), sometimes up to 20 m (50 ft), with a spread of 8 to 11 m (25 to 35 ft). It has very showy golden-yellow to red flowers in the spring. These are rich in nectar and thus the tree is a useful honey plant. While it is not especially popular with hummingbirds, some of these – e.g. glittering-bellied emerald (Chlorostilbon lucidus) and white-throated hummingbird (Leucochloris albicollis) – seem to prefer them over the flowers of other Tabebuia species.
       `;
       /*
@@ -243,7 +246,7 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "木棉";
       flowerSeason.textContent = "Season : Mar ~ Apr";
       flowerInfo.textContent =
-      `
+        `
       Cup-shaped flowers solitary or clustered, axillary or sub-terminal, fascicles at or near the ends of the branches, when the tree is bare of leaves, an average of 7~11 centimeters wide, 14 centimeters in width, petels up to 12 centimeters in length, calyx is cup-shaped usually 3 lobed, an average of 3~5 centimeters in diameter. Staminal tube is short, more than 60 in 5 bundles. stigma is light red, up to nine centimeters in length, ovary is pink, 1.5~2 centimeters in length, with the skin of the ovary covered in white silky hair at 1mm long. Seeds are numerous, long, ovoid, black or gray in colour and packed in white cotton.
       `;
       /*
@@ -258,7 +261,7 @@ window.change = async function(id1, id2, id3){
       flowerImg.src = "./imgs/6.jpg";
       //mapImg.src = "./imgs/map6.png";
       mapImg.alt =
-      `
+        `
       力行校區</p>
       成杏校區面長榮路</p>
       成功校區總圖旁</p><br><br>
@@ -267,7 +270,7 @@ window.change = async function(id1, id2, id3){
       flowerChineseName.textContent = "台灣欒樹";
       flowerSeason.textContent = "Season : July ~ Oct";
       flowerInfo.textContent =
-      `
+        `
       Koelreuteria elegans, more commonly known as Flamegold rain tree or Taiwanese rain tree, is a deciduous tree 15–17 metres tall endemic to Taiwan. It is widely grown throughout the tropics and sub-tropical parts of the world as a street tree. It flowers in early to mid-summer. Flowers are small, to 20 mm in length, and occur in branched clusters at the stem tips. They are butter-yellow with five petals that vary in length until opening. Each flower contains seven to eight pale yellow stamens with hairy white filaments. The fruit is a brown-purplish three-lobed capsule that splits to reveal a number of black seeds.
       `;
       /*
@@ -292,13 +295,14 @@ window.change = async function(id1, id2, id3){
     m.style.left = "0";
   //m.style.display = "block";
 }
+
 function delay(interval) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, interval);
-    });
+  return new Promise((resolve) => {
+    setTimeout(resolve, interval);
+  });
 };
 
-window.gotop = function() {
+window.gotop = function () {
   //map.style.display = "block";
   var m = document.getElementById('map');
 
