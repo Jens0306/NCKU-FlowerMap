@@ -30,11 +30,24 @@ h1 {
 	//padding-left: 10%;
 	//padding-right: 10%;
 }
-p {
+h2 {
+	line-height: 120%;
+	font-family: 'Great Vibes';
 	color: #000;
+}
+h3 {
+	font-weight: 1800;
+	font-size: 24px;
+	line-height: 150%;
+	font-family: 'Montserrat';
+	color: #000;
+}
+p {
+	font-weight: 600;
 	font-size: 18px;
 	line-height: 150%;
 	font-family: 'Montserrat';
+	color: #000;
 	//padding-left: 50px;
 	//padding-right: 50px;
 }
@@ -100,13 +113,25 @@ a {
 			background-color: rgba(0, 0, 0, 0.99);
 			display: block;
 			margin-top: 4px;
+			transition: .4s;
 		}
 	}
 }
 #sidebar.active {
 	left: 0;
 	.toggle-btn {
-		left: 250px;
+		left: 220px;
+	}
+	#span1 {
+		transform: rotate(40deg);
+	}
+	#span2 {
+		margin-top: -4px;
+		transform: rotate(-40deg);
+	}
+	#span3 {
+		//display: none;
+		background-color: rgba(0, 0, 0, 0);
 	}
 }
 //small screen
@@ -162,14 +187,21 @@ a {
 
 .flowerIntro {
 	//display: flex;
+	#flowerInfo {
+		text-align: left;
+	}
+	#flowerChineseName {
+		margin-top: -30px;
+	}
 	img {
+		//margin-top: -30px;
 		width: 90%;
 		height: 300px;
 	}
 	display: none;
 	flex-direction: row;
 	height: 450px;
-	width: 40%;
+	width: 35%;
 	//position: fixed;
 	position: absolute;
 	overflow-y: scroll;
@@ -192,38 +224,7 @@ a {
 	}
 }
 
-#map {
-    display: none;
-    //display: block;
-    z-index : 1;
-    transition: .5s;
-    position: absolute;
-    left:30%;
-    top: 33%;
-    width: 60%;
-    //height: 95%;
-    //background-color: #A0B6A5;
-    //background-color: transparent;
-    //background-image : url('../imgs/map.png');
-    //background-repeat: no-repeat;
-    //background-size: cover;
 
-    img {
-      width: inherit;
-      height: inherit;
-    }
-
-    //box-shadow: 20px 10px 50px black;
-    &:hover {
-      //z-index : 2;
-      //position: absolute;
-      //left:20%;
-			transition: .2s;
-      top: 20%;
-      width: 63%;
-      //height: 100%;
-		}
-}
 //small screen
 @media only screen and (max-width: 768px) {
 
@@ -240,12 +241,6 @@ a {
 			top: 12%;
 			flex-grow: 1;
 		}
-		#map {
-			width: 100%;
-			top: 100%;
-			//flex-grow: 1;
-			//position: relative;
-		}
 	}
 }
 
@@ -259,12 +254,29 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
+    //overflow: auto; /* Enable scroll if needed */
+		overflow: scroll;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+		p {
+		    margin: auto;
+		    //display: flex;
+				//flex-direction: row;
+		    width: 100%;
+		    //max-width: 100%;
+		    text-align: center;
+				align-items: top;
+		    color: #fff;
+				margin-top: -5%;
+		    padding-bottom: 5%;
+				font-size: 20px;
+				font-family: 'Montserrat';
+		    //height;
+		}
 }
 .modal-content {
     margin: auto;
+		margin-top: -10%;
     display: block;
     width: 80%;
     max-width: 700px;
@@ -272,16 +284,7 @@ a {
 		&:hover {
 		}
 }
-#caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-}
+
 .modal-content, #caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.2s;
@@ -333,9 +336,40 @@ a {
 	height: 100vh;
 	background-image: url('../imgs/hero.jpg');
 	background-size: cover;
-	transition: 1s;
+	transition: .6s;
 }
-
+#hero-text {
+	h1 {
+		line-height: 80%;
+		//margin-bottom: 10%;
+		font-family: 'Great Vibes';
+		font-size: 100px;
+		font-weight: 1000;
+		//background: -webkit-linear-gradient(#58067A, #A60CE5);
+  	//-webkit-background-clip: text;
+  	//-webkit-text-fill-color: transparent;
+		color: #F0F0F0;
+		text-shadow: 20px 20px 20px black;
+	}
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+// Media Queries
+@media only screen and (max-width: 768px) {
+	#hero-text {
+		h1 {
+			line-height: 80%;
+			//margin-bottom: 10%;
+			font-family: 'Great Vibes';
+			font-size: 50px;
+			color: #fff;
+		}
+	}
+}
 /*
 .layer-1 {
 	//background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_03.png');
@@ -424,4 +458,5 @@ a {
 	#hero-mobile {
 		//display: block;
 	}
+
 }

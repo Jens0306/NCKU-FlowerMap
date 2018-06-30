@@ -110,7 +110,7 @@ function Petal() {
         case 'one':
           grad.addColorStop(0, '#fbe0ef');   //in
           grad.addColorStop(0.1, '#f8c1d5'); //middle
-          grad.addColorStop(1, '#f3d3e2');   //out
+          grad.addColorStop(1, '#E8879B');   //out
           break;
         case 'two':
           grad.addColorStop(0, '#AD0B00');   //in
