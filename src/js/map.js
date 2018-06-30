@@ -1,4 +1,4 @@
-import location from '../static/location.json';
+import location from './location.json';
 
 var intro = document.getElementById('Intro');
 var flowerName = document.getElementById('flowerName');
