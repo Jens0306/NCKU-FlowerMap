@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack-dev-server --watch-poll",
     "build:prod": "webpack -p",
-    "start": "node src/server/server.js",
+    "webpack": "./node_modules/.bin/webpack -w",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "start": "node src/server/server.js",
     "server": "nodemon src/server/server.js",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+    "dev": "concurrently \"yarn run server\" \"yarn run build\""
   },
   "keywords": [],
   "author": "Jens",
@@ -47,8 +48,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "express": "^4.16.3"
+
   }
 }

@@ -9,8 +9,7 @@ var extractPlugin = new ExtractTextPlugin({
 
 module.exports = {
   mode: 'production',
-  entry : path.resolve(__dirname, 'src/js/entry.js'), //remember this one
-  //entry: path.resolve(__dirname, 'src/server/server.js'),
+  entry : path.resolve(__dirname, 'src/client/js/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -33,6 +32,7 @@ module.exports = {
                 }]
               ]
             }
+            //exclude: /node_modules/
           }
         ]
       },
@@ -77,19 +77,26 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    port: 3000,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  },
   plugins: [
     extractPlugin,
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new CleanWebpackPlugin(['dist'])
-    /*
+    new CleanWebpackPlugin(['dist']),
+    ///*
     new CopyWebpackPlugin(
       [
-        {from: './src/js'}
+        {from: './src/client/json', to: './json'}
       ],
       { ignore: [ '*.js'] }
     )
-    */
+    //*/
   ]
 };
