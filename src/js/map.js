@@ -1,5 +1,27 @@
-import location from './location.json';
-
+///*
+import location1 from '../json/location1.json';
+import location2 from '../json/location2.json';
+import location3 from '../json/location3.json';
+import location4 from '../json/location4.json';
+import location5 from '../json/location5.json';
+import location6 from '../json/location6.json';
+//*/
+/*
+const location1 = require('./location1.json');
+const location2 = require('./location2.json');
+const location3 = require('./location3.json');
+const location4 = require('./location4.json');
+const location5 = require('./location5.json');
+const location6 = require('./location6.json');
+*/
+/*
+location1 = $.parseJSON(location1);
+location2 = $.parseJSON(location2);
+location3 = $.parseJSON(location3);
+location4 = $.parseJSON(location4);
+location5 = $.parseJSON(location5);
+location6 = $.parseJSON(location6);
+*/
 var intro = document.getElementById('Intro');
 var flowerName = document.getElementById('flowerName');
 var flowerChineseName = document.getElementById('flowerChineseName');
@@ -41,27 +63,130 @@ var location = {
   ]
 };
 */
-L.geoJson(location, {
-  //onEachFeature: function (feature, layer) {
-  //	layer.bindPopup(feature.properties.tipo);
-  //}
-}).addTo(map);
+//flower icons
+var iconWidth = 30, iconHeight = 28;
+var icon1 = new L.Icon({
+      iconUrl: "./imgs/icon1.png",
+      iconSize: [iconWidth, iconHeight]
+    }),
+    icon2 = new L.Icon({
+      iconUrl: "./imgs/icon2.png",
+      iconSize: [iconWidth, iconHeight]
+    }),
+    icon3 = new L.Icon({
+      iconUrl: "./imgs/icon3.png",
+      iconSize: [iconWidth, iconHeight]
+    }),
+    icon4 = new L.Icon({
+      iconUrl: "./imgs/icon4.png",
+      iconSize: [iconWidth, iconHeight]
+    }),
+    icon5 = new L.Icon({
+      iconUrl: "./imgs/icon5.png",
+      iconSize: [iconWidth, iconHeight]
+    }),
+    icon6 = new L.Icon({
+      iconUrl: "./imgs/icon6.png",
+      iconSize: [iconWidth, iconHeight]
+    });
+function basement1(feature, layer) {
+  layer.bindPopup("<p>flower1</p>");
+  layer .setIcon(icon1);
+}
+function basement2(feature, layer) {
+  layer.bindPopup("<p>flower2</p>");
+  layer .setIcon(icon2);
+}
+function basement3(feature, layer) {
+  layer.bindPopup("<p>flower3</p>");
+  layer .setIcon(icon3);
+}
+function basement4(feature, layer) {
+  layer.bindPopup("<p>flower4</p>");
+  layer .setIcon(icon4);
+}
+function basement5(feature, layer) {
+  layer.bindPopup("<p>flower5</p>");
+  layer .setIcon(icon5);
+}
+function basement6(feature, layer) {
+  layer.bindPopup("<p>flower6</p>");
+  layer .setIcon(icon6);
+}
+//geoJson
+var flower1 = new L.geoJson(location1, {
+      onEachFeature: basement1
+    }),
+    flower2 = new L.geoJson(location2, {
+      onEachFeature: basement2
+    }),
+    flower3 = new L.geoJson(location3, {
+      onEachFeature: basement3
+    }),
+    flower4 = new L.geoJson(location4, {
+      onEachFeature: basement4
+    }),
+    flower5 = new L.geoJson(location5, {
+      onEachFeature: basement5
+    }),
+    flower6 = new L.geoJson(location6, {
+      onEachFeature: basement6
+    });
 
-//add some geoJson
 
+//pop up
 var popup = L.popup();
 
-
+//change geoJson
+function changeFlower(iconN) {
+  //remove current layer
+  if (map.hasLayer(flower1))
+    map.removeLayer(flower1);
+  else if (map.hasLayer(flower2))
+    map.removeLayer(flower2);
+  else if (map.hasLayer(flower3))
+    map.removeLayer(flower3);
+  else if (map.hasLayer(flower4))
+    map.removeLayer(flower4);
+  else if (map.hasLayer(flower5))
+    map.removeLayer(flower5);
+  else if (map.hasLayer(flower6))
+    map.removeLayer(flower6);
+  //add new layer
+  switch(iconN) {
+    case 1:
+    map.addLayer(flower1);
+    break;
+    case 2:
+    map.addLayer(flower2);
+    break;
+    case 3:
+    map.addLayer(flower3);
+    break;
+    case 4:
+    map.addLayer(flower4);
+    break;
+    case 5:
+    map.addLayer(flower5);
+    break;
+    case 6:
+    map.addLayer(flower6);
+    break;
+  }
+}
 
 // variable to define the icon based on the type of point
 function getStatoIcon(dat) {
-  return dat === 'platano' ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/autumn2.svg' :
-    dat === 'faggio' ? 'http://www.cityplanner.it/supply/icon_web/tree-icon/svg/tree79.svg' :
-    'http://www.cityplanner.it/supply/icon_web/mapbox-maki-51d4f10/src/park-24.svg';
+  return  dat === 'f1' ? icon1 :
+          dat === 'f2' ? icon2 :
+          dat === 'f3' ? icon3 :
+          dat === 'f4' ? icon4 :
+          dat === 'f5' ? icon5 :
+                         icon6;
 }
 // upload the geojson file with the jQuery method
 /*
-$.getJSON("./json/map.geojson", function(data) {
+$.getJSON(location1, function(data) {
 	var geojson = L.geoJson(data, {
   		pointToLayer: function (feature, latlng) {
   			// crea un punto e definisce l'icona per ogni punto
@@ -84,21 +209,7 @@ $.getJSON("./json/map.geojson", function(data) {
 	geojson.addTo(map);
 });
 */
-// insert function on click on the map
-window.addIcon = function (e) {
 
-  return L.marker(e.latlng, {
-    icon: L.icon({
-      iconUrl: getStatoIcon(feature.properties.tipo),
-      iconSize: [24, 28],
-      iconAnchor: [12, 28],
-      popupAnchor: [0, -25]
-    }),
-    //
-    title: feature.properties.tipo,
-    riseOnHover: true
-  });
-}
 
 function onMapClick(e) {
   // removes the central point with the popup
@@ -109,21 +220,53 @@ function onMapClick(e) {
   // defines the popup
   popup
     .setLatLng(e.latlng)
-    .setContent("<button onclick='addIcon(e)'>yes</button>")
     // create a form within the popup
-    /*
-    .setContent("<form method='POST'><input type='hidden' name='lat' value="
+    .setContent("<form id='add' action='addFlower' method='post'><input type='hidden' name='lat' value="
     	+lat
     	+"><input type='hidden' name='lng' value="
     	+lng
     	+">"
-    	+"<input type='radio' name='tipo' value='platano' checked>Platano<br>"
-    	+"<input type='radio' name='tipo' value='faggio'>Faggio<hr>"
-    	+"<button type='submit' name='submit' style='padding:4px;width:100%;'>+</button></form>")
-    	*/
+    	+"<input type='radio' name='flower' value='f1' checked/>f1<br>"
+    	+"<input type='radio' name='flower' value='f2'/>f2<br>"
+      +"<input type='radio' name='flower' value='f3'/>f3<br>"
+      +"<input type='radio' name='flower' value='f4'/>f4<br>"
+      +"<input type='radio' name='flower' value='f5'/>f5<br>"
+      +"<input type='radio' name='flower' value='f6'/>f6<hr>"
+    	//+"<input type='submit' style='padding:4px;width:100%;' value='+' /></form>")
+      +"<button type='submit' name='submit' style='padding:4px;width:100%;'>+</button></form>")
+
     .openOn(map);
 }
 map.on('click', onMapClick);
+
+//ajax to update geoJson
+$(document).ready(function() {
+  $('form').ajaxForm({
+      delegation: true,
+      //target:        '#map',   // target element(s) to be updated with server response
+      //beforeSubmit:  showRequest,  // pre-submit callback
+      success:       showResponse,  // post-submit callback
+      //target:        map.addLayer(flower1);
+  });
+})
+/*
+function showRequest(formData, jqForm, options) {
+    var queryString = $.param(formData);
+    alert('About to submit: \n\n' + queryString);
+    return true;
+}
+*/
+// post-submit callback
+function showResponse(responseText, statusText, xhr, $form) {
+  /*
+  $.getJSON(responseText[0], function() {
+    	changeFlower(responseText[1]);
+  });
+  */
+}
+//*/
+
+
 
 window.change = async function (id1, id2, id3) {
   var f = document.getElementById(id1);
@@ -148,6 +291,7 @@ window.change = async function (id1, id2, id3) {
 
   switch (id3) {
     case 'one':
+      changeFlower(1);
       bg.style = "background-image : url('./imgs/hero_blur1.jpg')";
       f.style = "background-color : pink";
       flowerImg.src = "./imgs/1.jpg";
@@ -168,6 +312,7 @@ window.change = async function (id1, id2, id3) {
       //`;
       break;
     case 'two':
+      changeFlower(2);
       bg.style = "background-image : url('./imgs/hero_blur2.jpg')";
       f.style = "background-color : #FFED9F";
       flowerImg.src = "./imgs/2.jpg";
@@ -193,6 +338,7 @@ window.change = async function (id1, id2, id3) {
       */
       break;
     case 'three':
+      changeFlower(3);
       bg.style = "background-image : url('./imgs/hero_blur3.jpg')";
       f.style = "background-color : #E8820C";
       flowerImg.src = "./imgs/3.jpg";
@@ -218,6 +364,7 @@ window.change = async function (id1, id2, id3) {
       */
       break;
     case 'four':
+      changeFlower(4);
       bg.style = "background-image : url('./imgs/hero_blur4.jpg')";
       f.style = "background-color : #A5B0FF";
       flowerImg.src = "./imgs/4.jpg";
@@ -237,6 +384,7 @@ window.change = async function (id1, id2, id3) {
       */
       break;
     case 'five':
+      changeFlower(5);
       bg.style = "background-image : url('./imgs/hero_blur5.jpg')";
       f.style = "background-color : #5B9960";
       flowerImg.src = "./imgs/5.jpg";
@@ -256,6 +404,7 @@ window.change = async function (id1, id2, id3) {
       */
       break;
     case 'six':
+      changeFlower(6);
       bg.style = "background-image : url('./imgs/hero_blur6.jpg')";
       f.style = "background-color : #A57555";
       flowerImg.src = "./imgs/6.jpg";

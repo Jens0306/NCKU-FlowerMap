@@ -6,9 +6,9 @@
 # install dependencies
 yarn
 
-# serve with hot reload at localhost:8080
-yarn run build
+# first, build for production with minification
+yarn run build:prod
 
-# build for production with minification
-build:prod
+# and then run with server.js at localhost:8080
+yarn run start
 ```
